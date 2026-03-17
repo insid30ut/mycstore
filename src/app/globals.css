@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: oklch(0.12 0.01 220);
+  --color-foreground: oklch(0.95 0.01 220);
+  
+  --color-primary: oklch(0.65 0.15 190);
+  --color-primary-foreground: oklch(0.98 0.01 190);
+  
+  --color-secondary: oklch(0.25 0.02 220);
+  --color-secondary-foreground: oklch(0.9 0.02 220);
+  
+  --color-accent: oklch(0.75 0.15 85);
+  --color-accent-foreground: oklch(0.15 0.05 85);
+  
+  --color-muted: oklch(0.2 0.02 220);
+  --color-muted-foreground: oklch(0.7 0.02 220);
+  
+  --color-border: oklch(0.25 0.03 220);
+  
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Outfit", sans-serif;
+  
+  --animate-float: float 6s ease-in-out infinite;
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground selection:bg-primary/30;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-semibold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-xl;
+  }
+  
+  .glass-dark {
+    @apply bg-black/20 backdrop-blur-lg border border-white/5 shadow-2xl;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-linear-to-br from-primary via-primary/80 to-accent;
+  }
+}
