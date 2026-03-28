@@ -3,6 +3,9 @@
 -- Constants and Enums
 CREATE TYPE product_category AS ENUM ('spores', 'cultures', 'substrates');
 
+-- Order Sequence
+CREATE SEQUENCE IF NOT EXISTS order_number_seq START 1001;
+
 -- Products Table
 CREATE TABLE products (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -36,6 +39,7 @@ CREATE TABLE product_images (
 -- Orders
 CREATE TABLE orders (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    order_number TEXT UNIQUE DEFAULT 'MFG-' || nextval('order_number_seq'),
     user_id UUID, -- Optional for guest checkout
     status TEXT DEFAULT 'pending', -- pending, paid, shipped, cancelled
     total_amount DECIMAL(10, 2) NOT NULL,

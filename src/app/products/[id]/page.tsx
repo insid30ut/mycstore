@@ -3,7 +3,8 @@
 import * as React from "react";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
-import { MOCK_PRODUCTS } from "@/lib/mock-data";
+import { supabase } from "@/lib/supabase";
+import { Product } from "@/types/product";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { formatPrice } from "@/lib/utils";
@@ -16,7 +17,41 @@ export default function ProductDetailPage() {
   const router = useRouter();
   const addItem = useCartStore((state) => state.addItem);
   
-  const product = MOCK_PRODUCTS.find((p) => p.id === id);
+  const [product, setProduct] = React.useState<Product | null>(null);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    async function fetchProduct() {
+      if (!id || typeof id !== "string") return;
+      const { data, error } = await supabase
+        .from("products")
+        .select(`*, product_images(url)`)
+        .eq("id", id)
+        .single();
+        
+      if (data) {
+        setProduct({
+          id: data.id,
+          name: data.name,
+          description: data.description,
+          price: data.price,
+          category: data.category as any,
+          metadata: data.metadata || {},
+          image: data.product_images?.[0]?.url || "https://images.unsplash.com/photo-1594950195709-a14f66c242d7?q=80&w=800&auto=format&fit=crop",
+        });
+      }
+      setLoading(false);
+    }
+    fetchProduct();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="container mx-auto px-4 py-32 text-center">
+        <h1 className="text-2xl font-bold mb-4">Loading mycelial data...</h1>
+      </div>
+    );
+  }
 
   if (!product) {
     return (

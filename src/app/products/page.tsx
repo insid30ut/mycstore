@@ -1,13 +1,35 @@
 import { Metadata } from "next";
-import { MOCK_PRODUCTS } from "@/lib/mock-data";
+import { supabase } from "@/lib/supabase";
 import { ProductCard } from "@/components/product-card";
+import { Product } from "@/types/product";
 
 export const metadata: Metadata = {
   title: "Shop Mycology Supplies | Mycelial FunGuy",
   description: "Browse our premium selection of sporeprints, live cultures, and sterilized substrates. Free shipping on all US orders.",
 };
 
-export default function ProductsPage() {
+// Revalidate every hour or rely on on-demand revalidation
+export const revalidate = 3600;
+
+export default async function ProductsPage() {
+  const { data: dbProducts } = await supabase
+    .from("products")
+    .select(`
+      *,
+      product_images (url)
+    `)
+    .eq("is_active", true);
+
+  const products: Product[] = (dbProducts || []).map((p: any) => ({
+    id: p.id,
+    name: p.name,
+    description: p.description,
+    price: p.price,
+    category: p.category,
+    metadata: p.metadata,
+    image: p.product_images?.[0]?.url || "https://images.unsplash.com/photo-1594950195709-a14f66c242d7?q=80&w=800&auto=format&fit=crop",
+  }));
+
   return (
     <div className="container mx-auto px-4 py-24">
       <div className="flex flex-col items-center mb-16 space-y-4">
@@ -21,7 +43,7 @@ export default function ProductsPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {MOCK_PRODUCTS.map((product) => (
+        {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
