@@ -21,9 +21,11 @@ export function Navbar() {
       <div className="container mx-auto">
         <div className="glass-dark rounded-full px-8 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 group">
-            <Sprout className="w-8 h-8 text-primary transition-transform group-hover:rotate-12" />
+            <div className="relative w-10 h-10 overflow-hidden rounded-full transition-transform group-hover:scale-105">
+              <img src="/logo.png" alt="Psilocyber Underworld Logo" className="object-cover w-full h-full" />
+            </div>
             <span className="text-xl font-bold tracking-tighter">
-              MYCELIAL <span className="text-primary">FUNGUY</span>
+              PSILOCYBER <span className="text-primary">UNDERWORLD</span>
             </span>
           </Link>
 

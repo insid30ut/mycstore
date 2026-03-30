@@ -15,7 +15,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Mycelial FunGuy | Premium Mycology Supplies",
+  title: "Psilocyber Underworld | Premium Mycology Supplies",
   description: "Highest quality sporeprints, swabs, and live cultures in the US. Expertly prepared and shipped with care for microscopy and research.",
   keywords: ["mycology", "spores", "liquid culture", "mushroom supplies", "spore prints"],
 };
