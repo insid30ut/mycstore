@@ -4,7 +4,7 @@ import { ProductCard } from "@/components/product-card";
 import { Product } from "@/types/product";
 
 export const metadata: Metadata = {
-  title: "Shop Mycology Supplies | Mycelial FunGuy",
+  title: "Shop Mycology Supplies | Psilocyber Underworld",
   description: "Browse our premium selection of sporeprints, live cultures, and sterilized substrates. Free shipping on all US orders.",
 };
 

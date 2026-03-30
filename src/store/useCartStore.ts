@@ -74,7 +74,7 @@ export const useCartStore = create<CartState>()(
       },
     }),
     {
-      name: "mycelial-cart-storage",
+      name: "psilocyber-cart-storage",
     }
   )
 );

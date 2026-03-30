@@ -48,7 +48,7 @@ export default function ProductDetailPage() {
   if (loading) {
     return (
       <div className="container mx-auto px-4 py-32 text-center">
-        <h1 className="text-2xl font-bold mb-4">Loading mycelial data...</h1>
+        <h1 className="text-2xl font-bold mb-4">Loading specimen data...</h1>
       </div>
     );
   }
@@ -56,7 +56,7 @@ export default function ProductDetailPage() {
   if (!product) {
     return (
       <div className="container mx-auto px-4 py-32 text-center">
-        <h1 className="text-2xl font-bold mb-4">Strain not found in our mycelial database.</h1>
+        <h1 className="text-2xl font-bold mb-4">Specimen not found in our database.</h1>
         <Button onClick={() => router.push("/products")}>Back to Shop</Button>
       </div>
     );

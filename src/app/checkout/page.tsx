@@ -56,7 +56,7 @@ export default function CheckoutPage() {
 
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase text-muted-foreground">Address</label>
-                  <input type="text" className="w-full bg-white/5 border border-white/10 rounded-md p-3 focus:border-primary outline-hidden" placeholder="123 Mycelial Way" />
+                  <input type="text" className="w-full bg-white/5 border border-white/10 rounded-md p-3 focus:border-primary outline-hidden" placeholder="123 Underworld Way" />
                 </div>
 
                 <div className="grid grid-cols-3 gap-4">

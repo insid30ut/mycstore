@@ -26,7 +26,7 @@ export default async function AdminLayout({
         <div>
           <div className="mb-8">
             <h1 className="text-xl font-bold tracking-tight text-gradient">
-              Mycelial Admin
+              Psilocyber Admin
             </h1>
             <p className="text-xs text-muted-foreground mt-1">Hello, Owner</p>
           </div>
