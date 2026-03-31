@@ -71,6 +71,18 @@ ALTER TABLE order_items ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Anyone can view active products" ON products
     FOR SELECT USING (is_active = true);
 
+-- Admin product management (Authenticated users can manage products)
+CREATE POLICY "Authenticated users can view all products" ON products FOR SELECT USING (auth.uid() IS NOT NULL);
+CREATE POLICY "Authenticated users can insert products" ON products FOR INSERT WITH CHECK (auth.uid() IS NOT NULL);
+CREATE POLICY "Authenticated users can update products" ON products FOR UPDATE USING (auth.uid() IS NOT NULL);
+CREATE POLICY "Authenticated users can delete products" ON products FOR DELETE USING (auth.uid() IS NOT NULL);
+
+-- Admin product images management
+CREATE POLICY "Anyone can view product images" ON product_images FOR SELECT USING (true);
+CREATE POLICY "Authenticated users can insert product images" ON product_images FOR INSERT WITH CHECK (auth.uid() IS NOT NULL);
+CREATE POLICY "Authenticated users can update product images" ON product_images FOR UPDATE USING (auth.uid() IS NOT NULL);
+CREATE POLICY "Authenticated users can delete product images" ON product_images FOR DELETE USING (auth.uid() IS NOT NULL);
+
 -- Orders: Users can only see their own orders (if logged in)
 -- For now, we'll allow selection by email + stripe_session_id for guest lookups later
 CREATE POLICY "Users can view their own orders" ON orders
