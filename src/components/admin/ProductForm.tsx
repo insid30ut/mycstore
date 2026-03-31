@@ -130,13 +130,13 @@ export function ProductForm({ initialData }: ProductFormProps) {
       <div className="space-y-2">
         <label className="text-sm font-medium text-muted-foreground">Image URL</label>
         <input 
-          type="url" 
+          type="text" 
           name="image_url" 
           defaultValue={initialData?.product_images?.[0]?.url}
           className="w-full bg-black/40 border border-white/10 rounded-md p-2 text-white placeholder-muted-foreground focus:ring-1 focus:ring-primary"
-          placeholder="https://..."
+          placeholder="https://... or /image.png"
         />
-        <p className="text-xs text-muted-foreground">Enter an external URL for the product image.</p>
+        <p className="text-xs text-muted-foreground">Enter an external URL or a local file path (e.g., /banner.png).</p>
         {initialData?.product_images?.[0]?.url && (
             <div className="mt-2 w-24 h-24 rounded border border-white/10 overflow-hidden relative">
               <img src={initialData.product_images[0].url} alt="Preview" className="object-cover w-full h-full" />
