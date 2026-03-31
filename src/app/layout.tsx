@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
-import { Navbar } from "@/components/navbar";
-import { CartSidebar } from "@/components/cart/cart-sidebar";
 import "./globals.css";
 
 const inter = Inter({
@@ -31,11 +29,7 @@ export default function RootLayout({
         className={`${inter.variable} ${outfit.variable} antialiased selection:bg-primary/30`}
       >
         <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(17,24,39,1),rgba(0,0,0,1))] -z-10" />
-        <Navbar />
-        <CartSidebar />
-        <main className="min-h-screen">
-          {children}
-        </main>
+        {children}
       </body>
     </html>
   );
