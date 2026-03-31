@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, ShieldCheck, Zap, Package } from "lucide-react";
-import { formatPrice } from "@/lib/utils";
 import { ProductCard } from "@/components/product-card";
 
 interface HomeContentProps {
@@ -13,75 +13,97 @@ interface HomeContentProps {
 export function HomeContent({ featuredProducts }: HomeContentProps) {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-6 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(16,185,129,0.1),transparent_50%)]" />
-        
-        <div className="container mx-auto max-w-5xl relative z-10 text-center">
+      {/* Hero Section — Banner Image */}
+      <section className="relative overflow-hidden" style={{ minHeight: "90vh" }}>
+        {/* Banner Image Layer */}
+        <div className="absolute inset-0">
+          <Image
+            src="/banner.png"
+            alt="Psilocyber Underworld — Psychedelic mushroom banner"
+            fill
+            priority
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+        </div>
+
+        {/* Gradient overlays to keep text readable */}
+        {/* Top overlay — fades from dark (navbar area) to transparent */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/30 to-black/75" />
+        {/* Subtle radial glow to tie in the brand color */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(16,185,129,0.12),transparent_60%)]" />
+
+        {/* Hero Content */}
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 pt-40 pb-32 min-h-[90vh]">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-sm font-medium mb-8"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-black/40 backdrop-blur-sm text-primary text-sm font-medium mb-8"
           >
             <Zap className="w-4 h-4" />
             <span>New genetics available now</span>
           </motion.div>
 
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 bg-gradient-to-br from-white to-white/60 bg-clip-text text-transparent"
+            className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 drop-shadow-2xl"
+            style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8)" }}
           >
-            Explore the Depths of
+            <span className="text-white">Explore the Depths of</span>
             <br />
-            <span className="text-primary filter drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]">
+            <span className="text-primary filter drop-shadow-[0_0_20px_rgba(16,185,129,0.6)]">
               Underworld Genetics
             </span>
           </motion.h1>
 
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed text-white/80 drop-shadow-lg"
+            style={{ textShadow: "0 1px 8px rgba(0,0,0,0.9)" }}
           >
-            Premium quality spore prints, liquid cultures, and microscopy supplies. 
+            Premium quality spore prints, liquid cultures, and microscopy supplies.
             Expertly curated and sterilely prepared for rigorous research and taxonomy.
           </motion.p>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Link 
+            <Link
               href="/products"
-              className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-black bg-primary rounded-full overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_20px_rgba(16,185,129,0.4)]"
+              className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-black bg-primary rounded-full overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] cursor-pointer"
             >
               <span className="relative z-10 flex items-center gap-2">
                 Browse Collection
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </span>
             </Link>
-            
-            <Link 
+
+            <Link
               href="/about"
-              className="inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-white/5 border border-white/10 rounded-full transition-all hover:bg-white/10"
+              className="inline-flex items-center justify-center px-8 py-4 font-medium text-white backdrop-blur-sm bg-black/30 border border-white/20 rounded-full transition-all hover:bg-black/50 cursor-pointer"
             >
               Learn Our Process
             </Link>
           </motion.div>
         </div>
+
+        {/* Bottom fade into the next section */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
       </section>
 
       {/* Value Propositions */}
       <section className="py-20 bg-black/50 border-y border-white/5">
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -96,7 +118,7 @@ export function HomeContent({ featuredProducts }: HomeContentProps) {
               </p>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -112,7 +134,7 @@ export function HomeContent({ featuredProducts }: HomeContentProps) {
               </p>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -142,9 +164,9 @@ export function HomeContent({ featuredProducts }: HomeContentProps) {
                 Explore our most popular and highly sought-after mycological supplies.
               </p>
             </div>
-            <Link 
-              href="/products" 
-              className="hidden md:flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium"
+            <Link
+              href="/products"
+              className="hidden md:flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium cursor-pointer"
             >
               View all inventory
               <ArrowRight className="w-4 h-4" />
@@ -170,11 +192,11 @@ export function HomeContent({ featuredProducts }: HomeContentProps) {
               <p className="text-muted-foreground text-lg">Inventory is currently being updated.</p>
             </div>
           )}
-          
+
           <div className="mt-8 flex justify-center md:hidden">
-            <Link 
-              href="/products" 
-              className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium"
+            <Link
+              href="/products"
+              className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium cursor-pointer"
             >
               View all inventory
               <ArrowRight className="w-4 h-4" />
@@ -183,13 +205,14 @@ export function HomeContent({ featuredProducts }: HomeContentProps) {
         </div>
       </section>
 
-      {/* Futuristic Footer */}
+      {/* Footer */}
       <footer className="mt-auto py-12 px-6 border-t border-white/5 bg-black/80">
         <div className="container mx-auto max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
             <div className="col-span-1 md:col-span-2">
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-8 h-8 relative rounded-full overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src="/logo.png" alt="Logo" className="object-cover w-full h-full" />
                 </div>
                 <span className="text-xl font-bold tracking-tighter">
@@ -197,19 +220,19 @@ export function HomeContent({ featuredProducts }: HomeContentProps) {
                 </span>
               </div>
               <p className="text-sm text-muted-foreground max-w-xs leading-relaxed">
-                Elevating mycology research with premium genetics, sterile supplies, and an uncompromising dedication to the craft. 
+                Elevating mycology research with premium genetics, sterile supplies, and an uncompromising dedication to the craft.
               </p>
             </div>
-            
+
             <div>
               <h4 className="font-semibold mb-4 text-white">Store</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><Link href="/products" className="hover:text-primary transition-colors">All Products</Link></li>
                 <li><Link href="/about" className="hover:text-primary transition-colors">Research Info</Link></li>
-                <li><Link href="/shipping" className="hover:text-primary transition-colors">Shipping & Returns</Link></li>
+                <li><Link href="/shipping" className="hover:text-primary transition-colors">Shipping &amp; Returns</Link></li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="font-semibold mb-4 text-white">Legal</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
@@ -218,7 +241,7 @@ export function HomeContent({ featuredProducts }: HomeContentProps) {
               </ul>
             </div>
           </div>
-          
+
           <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between text-xs text-muted-foreground">
             <p>© {new Date().getFullYear()} Psilocyber Underworld. All rights reserved.</p>
             <p className="mt-2 md:mt-0">For microscopy and taxonomy purposes only.</p>
