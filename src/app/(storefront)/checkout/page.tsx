@@ -12,8 +12,39 @@ import Image from "next/image";
 
 export default function CheckoutPage() {
   const [mounted, setMounted] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
   const { items, getTotalPrice } = useCartStore();
   const router = useRouter();
+
+  /**
+   * Calls the /api/checkout route to create a Stripe Checkout Session,
+   * then redirects the browser to the hosted Stripe payment page.
+   */
+  const handleCheckout = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.url) {
+        throw new Error(data.error ?? "Failed to start checkout");
+      }
+
+      // Redirect to Stripe-hosted Checkout
+      window.location.href = data.url;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong");
+      setIsLoading(false);
+    }
+  };
+
 
   React.useEffect(() => {
     setMounted(true);
@@ -89,11 +120,30 @@ export default function CheckoutPage() {
                 <CreditCard className="w-6 h-6" />
                 <h2 className="text-xl font-bold">Payment Method</h2>
               </div>
-              <Card className="p-6">
-                <p className="text-sm text-muted-foreground mb-4">Payment processing will be handled securely via Stripe.</p>
-                <Button className="w-full h-12 gap-2" variant="primary">
-                  <ShieldCheck className="w-5 h-5" />
-                  Confirm and Pay {formatPrice(getTotalPrice())}
+              <Card className="p-6 space-y-4">
+                <p className="text-sm text-muted-foreground">Payment processing will be handled securely via Stripe. You will be redirected to a hosted checkout page.</p>
+                {error && (
+                  <p className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-md px-4 py-2">
+                    {error}
+                  </p>
+                )}
+                <Button
+                  className="w-full h-12 gap-2"
+                  variant="primary"
+                  onClick={handleCheckout}
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <>
+                      <span className="w-4 h-4 border-2 border-black/40 border-t-black rounded-full animate-spin" />
+                      Redirecting to Stripe...
+                    </>
+                  ) : (
+                    <>
+                      <ShieldCheck className="w-5 h-5" />
+                      Confirm and Pay {formatPrice(getTotalPrice())}
+                    </>
+                  )}
                 </Button>
               </Card>
             </section>
