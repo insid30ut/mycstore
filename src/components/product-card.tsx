@@ -9,7 +9,6 @@ import { Badge } from "@/components/ui/Badge";
 import { formatPrice } from "@/lib/utils";
 import { useCartStore } from "@/store/useCartStore";
 import { ShoppingCart } from "lucide-react";
-import { motion } from "framer-motion";
 
 interface ProductCardProps {
   product: Product;

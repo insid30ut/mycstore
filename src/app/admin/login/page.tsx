@@ -1,5 +1,5 @@
 import { login } from "./actions";
-import { SearchParams } from "next/dist/server/request/search-params";
+
 
 export default async function LoginPage({
   searchParams,

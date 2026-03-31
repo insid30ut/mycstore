@@ -23,7 +23,7 @@ export default function ProductDetailPage() {
   React.useEffect(() => {
     async function fetchProduct() {
       if (!id || typeof id !== "string") return;
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from("products")
         .select(`*, product_images(url)`)
         .eq("id", id)
@@ -35,7 +35,7 @@ export default function ProductDetailPage() {
           name: data.name,
           description: data.description,
           price: data.price,
-          category: data.category as any,
+          category: data.category as Product["category"],
           metadata: data.metadata || {},
           image: data.product_images?.[0]?.url || "https://images.unsplash.com/photo-1594950195709-a14f66c242d7?q=80&w=800&auto=format&fit=crop",
         });

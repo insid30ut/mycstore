@@ -20,7 +20,15 @@ export default async function ProductsPage() {
     `)
     .eq("is_active", true);
 
-  const products: Product[] = (dbProducts || []).map((p: any) => ({
+  const products: Product[] = (dbProducts || []).map((p: {
+    id: string;
+    name: string;
+    description: string;
+    price: number;
+    category: Product["category"];
+    metadata: Record<string, string | number | boolean | null | undefined>;
+    product_images?: { url: string }[];
+  }) => ({
     id: p.id,
     name: p.name,
     description: p.description,

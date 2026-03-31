@@ -5,8 +5,7 @@ import { useCartStore } from "@/store/useCartStore";
 import { formatPrice } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { ArrowLeft, ShieldCheck, Truck, CreditCard } from "lucide-react";
-import Link from "next/link";
+import { ShieldCheck, Truck, CreditCard } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 

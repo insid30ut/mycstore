@@ -5,9 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, ShieldCheck, Zap, Package } from "lucide-react";
 import { ProductCard } from "@/components/product-card";
+import { Product } from "@/types/product";
 
 interface HomeContentProps {
-  featuredProducts: any[];
+  featuredProducts: Product[];
 }
 
 export function HomeContent({ featuredProducts }: HomeContentProps) {

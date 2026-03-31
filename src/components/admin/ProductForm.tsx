@@ -5,7 +5,18 @@ import { saveProduct } from "@/lib/actions/product";
 import { Button } from "@/components/ui/Button";
 
 interface ProductFormProps {
-  initialData?: any;
+  initialData?: {
+    id?: string;
+    name?: string;
+    slug?: string;
+    description?: string;
+    price?: number;
+    stock_count?: number;
+    category?: string;
+    is_active?: boolean;
+    metadata?: Record<string, unknown>;
+    product_images?: { url: string }[];
+  } | null;
 }
 
 export function ProductForm({ initialData }: ProductFormProps) {

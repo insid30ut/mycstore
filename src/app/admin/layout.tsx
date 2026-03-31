@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/server";
-import { Settings, Package, LayoutDashboard, LogOut } from "lucide-react";
+import { Package, LayoutDashboard, LogOut } from "lucide-react";
 import { logout } from "@/app/admin/login/actions";
 
 export default async function AdminLayout({
