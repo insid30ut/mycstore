@@ -34,7 +34,7 @@ export function Navbar() {
               Products
             </Link>
             <Link href="/about" className="text-sm font-medium hover:text-primary transition-colors">
-              Our Research
+              About Us
             </Link>
             <Link href="/contact" className="text-sm font-medium hover:text-primary transition-colors">
               Support
