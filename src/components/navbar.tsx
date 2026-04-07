@@ -37,7 +37,7 @@ export function Navbar() {
               About Us
             </Link>
             <Link href="/contact" className="text-sm font-medium hover:text-primary transition-colors">
-              Support
+              Contact Us
             </Link>
           </div>
 
